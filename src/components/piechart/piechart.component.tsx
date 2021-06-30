@@ -11,13 +11,14 @@ const PieChart: React.FC<IProps> = ({ data }) => {
 	const [count, setCount] = useState({ M: 0, F: 0 });
 
 	useEffect(() => {
+		let M = 0;
+		let F = 0;
+
 		data.forEach(({ gender }) => {
-			if (gender === "M") {
-				setCount({ ...count, M: ++count.M });
-			} else if (gender === "F") {
-				setCount({ ...count, F: ++count.F });
-			}
+			gender === "M" ? M++ : gender === "F" ? F++ : undefined;
 		});
+
+		setCount({ M, F });
 	}, [data]);
 
 	return (

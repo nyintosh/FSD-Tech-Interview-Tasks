@@ -11,15 +11,15 @@ const BarChart: React.FC<IProps> = ({ data }) => {
 	const [count, setCount] = useState({ Y: 0, A: 0, S: 0 });
 
 	useEffect(() => {
+		let Y = 0;
+		let A = 0;
+		let S = 0;
+
 		data.forEach(({ age }) => {
-			if (age >= 0 && age <= 35) {
-				setCount({ ...count, Y: ++count.Y });
-			} else if (age > 35 && age <= 50) {
-				setCount({ ...count, A: ++count.A });
-			} else if (age > 50) {
-				setCount({ ...count, S: ++count.S });
-			}
+			age >= 0 && age <= 35 ? Y++ : age > 35 && age <= 50 ? A++ : age > 50 ? S++ : undefined;
 		});
+
+		setCount({ Y, A, S });
 	}, [data]);
 
 	return (
